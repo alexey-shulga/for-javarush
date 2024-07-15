@@ -26,44 +26,46 @@ public class JavaRush {
 
     public static void main(String[] args) {
 
-        int[] nums = new int[]{0, 1, 0, 3, 12, 0, 0, 0, 100};
+        String good1 = "good. day! yad doog.";
+        String bad1 = "123456";
 
-        System.out.println("BEFORE:");
-        System.out.println(Arrays.toString(nums));
-        System.out.println("AFTER:");
-        nums = exeZeros(nums);
-        System.out.println(Arrays.toString(nums));
-
-
-
-        Persona[] memory = new Persona[]{
-                new Persona("Alex", 27, true),
-                null,
-                new Persona("Diana", 27, false),
-                new Persona("Yarik", 7, true),
-                null,
-                new Persona("Vasya", 55, true),
-                null,
-                null,
-                null,
-                new Persona("Galya", 49, false)
-        };
+        System.out.println(canWeMakePalindrome(good1));
+        System.out.println(canWeMakePalindrome(bad1));
 
     }
 
-    public static int[] exeZeros(int[] nums) {
+    public static boolean canWeMakePalindrome(String text) {
+        text = text.toUpperCase().trim();
+        text = text.replaceAll(" ", "");
+        text = text.replaceAll(",", "");
+        text = text.replaceAll("\\.", "");
+        text = text.replaceAll("!", "");
+        text = text.replaceAll("\\?", "");
+        char[] textArray = text.toCharArray();
+        int[] lettersCount = new int[textArray.length];
+        Arrays.sort(textArray);
+        int count = 1;
         int index = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                nums[index] = nums[i];
-                index++;
+        for (int i = 0; i < textArray.length - 1; i++) {
+            if (i == textArray.length - 2) {
+                lettersCount[index] = count + 1;
             }
+            if (textArray[i] != textArray[i + 1]) {
+                lettersCount[index] = count;
+                index = i + 1;
+                count = 1;
+            } else count ++;
         }
-        for (int i = index; i < nums.length; i++) {
-            nums[i] = 0;
+        boolean isOdd = false;
+        for (int i : lettersCount) {
+            if (i % 2 != 0 || isOdd) return false;
         }
-        return nums;
+        System.out.println(Arrays.toString(textArray));
+        System.out.println(Arrays.toString(lettersCount));
+        return true;
     }
+
+
 
 
 
