@@ -26,8 +26,38 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
+        Persona[] personaList = makeRandomPersona(10, 50);
 
 
+        System.out.println("Общее кол-во персон: " + Persona.getPersonaCount());
+        for (int i = 0; i < personaList.length; i++) {
+            System.out.println(personaList[i].toString());
+        }
+
+    }
+
+    public static Persona[] makeRandomPersona(int persCount, int maxAge) {
+        Persona[] result = new Persona[persCount];
+        for (int i = 0; i < persCount; i++) {
+            result[i] = new Persona();
+            result[i].setName(getRandText());
+            result[i].setAge((int)(Math.random() * maxAge));
+            result[i].setGender(i % 2 == 0 ? true : false);
+        }
+        return result;
+    }
+
+    public static String getRandText() {
+        String result = "";
+        char[] letters = new char[]{
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
+        };
+        for (int i = 0; i < (int) (Math.random() * 10); i++) {
+            int random = (int) (Math.random() * 36);
+            result += letters[random];
+        }
+        return result;
     }
 
 }
