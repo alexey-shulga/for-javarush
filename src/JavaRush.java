@@ -1,8 +1,5 @@
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Scanner;
+import java.util.*;
 
 public class JavaRush {
 
@@ -27,9 +24,18 @@ public class JavaRush {
      * StringBuffered - как и StringBuilder только потокобезопасный
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable{
 
-        
+        for (int i = 0; i < 100000; i++) {
+            System.out.print(i + " >>> ");
+            Persona pers1 = new Persona("Alex", 27, true);
+            System.out.println(pers1);
+            pers1 = null;
+            Persona pers2 = new Persona();
+            pers2.setName("XYU");
+            pers2.setAge(22);
+            pers2.setGender(false);
+        }
 
     }
 
