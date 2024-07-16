@@ -1,5 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -28,14 +29,8 @@ public class JavaRush {
 
     public static void main(String[] args) {
 
-        String str = "";
-        int x = 2;
+        
 
-        str = switch (x) {
-            case 1 -> "ONE";
-            default -> "EVERYONE";
-        };
-        System.out.println(str);
     }
 
 }
