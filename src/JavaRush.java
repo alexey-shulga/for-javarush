@@ -26,13 +26,26 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        Persona[] personaList = makeRandomPersona(10, 50);
+        Programmer pr1 = new Programmer(
+                "Alexey Shulga",
+                27,
+                true,
+                "Google",
+                10,
+                new String[] {"Java", "Git", "Docker", "Maven/Gradle"}
+        );
+        Programmer pr2 = new Programmer();
+        pr2.setName("Shulga Alexey");
+        pr2.setAge(27);
+        pr2.setGender(true);
+        pr2.setCompanyName("Google");
+        pr2.setJobExperience(10);
+        pr2.setJobStack(new String[] {"Java", "Git", "Docker", "Maven/Gradle"});
 
 
-        System.out.println("Общее кол-во персон: " + Persona.getPersonaCount());
-        for (int i = 0; i < personaList.length; i++) {
-            System.out.println(personaList[i].toString());
-        }
+        System.out.println(pr1.hashCode() + " " + pr2.hashCode());
+        System.out.println("By hash: " + (pr1.hashCode() == pr2.hashCode()));
+        System.out.println("By equals: " + pr1.equals(pr2));
 
     }
 
