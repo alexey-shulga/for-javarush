@@ -21,20 +21,25 @@ public class JavaRush {
      * String (работа со строками) - неизменяемый тип, создает новую ячейку памяти при изменении старой строки
      * StringBuilder - изменяемый тип, не создает новых ячеек памяти при изменении старой строки
      * StringBuffered - как и StringBuilder только потокобезопасный
+     * Типы-обертки Integer, Character, Double, Boolean, Float, Long (в этих типах есть свои методы !!!)
+     * Основа Коллекций ArrayList
+     * Дженерики - типы данных в которых есть возможность установить типы в качестве параметра,
+     * например Collection<Integer> или ТипДанных<ТипПараметра>
+     *     
      */
 
     public static void main(String[] args) throws Throwable{
 
-        Persona[] list = makeRandomPersona(100, 75);
+        ArrayList<Object> pers = new ArrayList<>() {{
+           add(1);
+           add("SUKA");
+           add(new Persona());
+        }};
 
-        /*for (Persona pers : list) {
-            System.out.println(pers.toString());
-        }*/
+        pers.removeIf(x -> !(x instanceof Persona));
 
-        Integer a = 10000;
-        Integer b = 10000;
-
-        System.out.println(a == b);
+        for (Object o : pers)
+            System.out.println(o);
 
     }
 
