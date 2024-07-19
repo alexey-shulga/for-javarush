@@ -27,9 +27,14 @@ public class JavaRush {
 
         Persona[] list = makeRandomPersona(100, 75);
 
-        for (Persona pers : list) {
+        /*for (Persona pers : list) {
             System.out.println(pers.toString());
-        }
+        }*/
+
+        Integer a = 10000;
+        Integer b = 10000;
+
+        System.out.println(a == b);
 
     }
 
