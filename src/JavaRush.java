@@ -23,6 +23,7 @@ public class JavaRush {
      * StringBuffered - как и StringBuilder только потокобезопасный
      * Типы-обертки Integer, Character, Double, Boolean, Float, Long (в этих типах есть свои методы !!!)
      * Основа Коллекций ArrayList
+     * Iterator<> для обхода коллекции и удаления/изменения элементов во время обхода
      * При переводе из ArrayList в обычный массив (arraylist.toArray(new Array[0])) лучше указать пустой массив
      *      в качестве параметра, т.к. это улучшит производительность, хз почему так
      * Дженерики - типы данных в которых есть возможность установить типы в качестве параметра,
@@ -36,26 +37,15 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        ArrayList<Persona> per = new ArrayList<>(){{
-            add(new Persona("Alex", 27, true));
-            add(new Persona("Diana", 27, false));
-            add(new Persona("Yaroslav", 7, true));
-            add(new Persona("Vasiliy", 55, true));
-            add(new Persona("Elena", 50, false));
-            add(new Persona("Sergey", 53, true));
-            add(new Persona("Galina", 50, false));
-            add(new Persona("Dmitriy", 25, true));
-            add(new Persona("Milana", 20, false));
-            add(new Persona("Olga", 25, false));
-            add(new Persona("Dmitry", 26, true));
-        }};
-
-        per.remove(8);
-
-        for (Persona pers : per) {
-            System.out.println(pers);
+        String[] langArray = {"Java", "Python", "Kotlin", "Swift", "C++", "C#", "ASSEMBLER"};
+        ArrayList<String> lang = new ArrayList<>(Arrays.asList(langArray));
+        HashMap<Integer, String> langMap = new HashMap<>();
+        for (int i = 0; i < lang.size(); i++) {
+            langMap.put(i, lang.get(i));
         }
-
+        for (Map.Entry<Integer, String> pair : langMap.entrySet()) {
+            System.out.println(pair.getKey() + " > " + pair.getValue());
+        }
     }
 
     public static void makeSomeMagic(ArrayList<Integer> x) {
