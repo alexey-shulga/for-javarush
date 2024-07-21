@@ -37,15 +37,16 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        String[] langArray = {"Java", "Python", "Kotlin", "Swift", "C++", "C#", "ASSEMBLER"};
-        ArrayList<String> lang = new ArrayList<>(Arrays.asList(langArray));
-        HashMap<Integer, String> langMap = new HashMap<>();
-        for (int i = 0; i < lang.size(); i++) {
-            langMap.put(i, lang.get(i));
+        enum Literatura {
+            A_S_PUSHKIN,
+            DOSTOEVSKY,
+            PIDORASINA_CHE_ZA_HUYNYA
         }
-        for (Map.Entry<Integer, String> pair : langMap.entrySet()) {
-            System.out.println(pair.getKey() + " > " + pair.getValue());
-        }
+
+        Literatura lit = Literatura.A_S_PUSHKIN;
+
+        System.out.println(lit.ordinal());
+
     }
 
     public static void makeSomeMagic(ArrayList<Integer> x) {
