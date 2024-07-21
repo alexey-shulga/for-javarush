@@ -22,7 +22,7 @@ public class JavaRush {
      * StringBuilder - изменяемый тип, не создает новых ячеек памяти при изменении старой строки
      * StringBuffered - как и StringBuilder только потокобезопасный
      * Типы-обертки Integer, Character, Double, Boolean, Float, Long (в этих типах есть свои методы !!!)
-     * Основа Коллекций ArrayList
+     * Основа Коллекций ArrayList, LinkedList (хз как с ним работать и нах он нужен)
      * Iterator<> для обхода коллекции и удаления/изменения элементов во время обхода
      * При переводе из ArrayList в обычный массив (arraylist.toArray(new Array[0])) лучше указать пустой массив
      *      в качестве параметра, т.к. это улучшит производительность, хз почему так
@@ -37,21 +37,19 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        enum Literatura {
-            A_S_PUSHKIN,
-            DOSTOEVSKY,
-            PIDORASINA_CHE_ZA_HUYNYA
-        }
+        HashMap<String, Integer> mapa = new HashMap<>(){{
+            put("ALEXEY SHULGA", 180);
+            put("DINA SHULGA", 170);
+            put("YAROSLAVV SHULGA", 120);
+        }};
+        
+        System.out.println(mapa.get("ALEXEY SHULGA"));
 
-        Literatura lit = Literatura.A_S_PUSHKIN;
-
-        System.out.println(lit.ordinal());
-
-    }
-
-    public static void makeSomeMagic(ArrayList<Integer> x) {
+        mapa.forEach((key, val) -> System.out.printf("NAME: %s | HEIGH: %d\n", key, val));
 
     }
+
+
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
         Persona[] result = new Persona[persCount];
@@ -59,7 +57,7 @@ public class JavaRush {
             result[i] = new Persona();
             result[i].setName(getRandText());
             result[i].setAge((int)(Math.random() * maxAge) + 1);
-            result[i].setGender(i % 2 == 0 ? true : false);
+            result[i].setGender(i % 2 == 0 ? Gender.MALE : Gender.FEMALE);
         }
         return result;
     }
