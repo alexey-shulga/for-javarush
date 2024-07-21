@@ -23,23 +23,42 @@ public class JavaRush {
      * StringBuffered - как и StringBuilder только потокобезопасный
      * Типы-обертки Integer, Character, Double, Boolean, Float, Long (в этих типах есть свои методы !!!)
      * Основа Коллекций ArrayList
+     * При переводе из ArrayList в обычный массив (arraylist.toArray(new Array[0])) лучше указать пустой массив
+     *      в качестве параметра, т.к. это улучшит производительность, хз почему так
      * Дженерики - типы данных в которых есть возможность установить типы в качестве параметра,
-     * например Collection<Integer> или ТипДанных<ТипПараметра>
-     *     
+     *      например Collection<Integer> или ТипДанных<ТипПараметра>
+     * Автоупаковка/автораспаковка (для приведения Integer в int можно ничего не делать, компилятор сам разберется с этим)
+     *      (ИСКЛЮЧЕНИЕ - массив int[] и массив Integer[] - разные)
+     *
+     *
+     *
      */
 
     public static void main(String[] args) throws Throwable{
 
-        ArrayList<Object> pers = new ArrayList<>() {{
-           add(1);
-           add("SUKA");
-           add(new Persona());
+        ArrayList<Persona> per = new ArrayList<>(){{
+            add(new Persona("Alex", 27, true));
+            add(new Persona("Diana", 27, false));
+            add(new Persona("Yaroslav", 7, true));
+            add(new Persona("Vasiliy", 55, true));
+            add(new Persona("Elena", 50, false));
+            add(new Persona("Sergey", 53, true));
+            add(new Persona("Galina", 50, false));
+            add(new Persona("Dmitriy", 25, true));
+            add(new Persona("Milana", 20, false));
+            add(new Persona("Olga", 25, false));
+            add(new Persona("Dmitry", 26, true));
         }};
 
-        pers.removeIf(x -> !(x instanceof Persona));
+        per.remove(8);
 
-        for (Object o : pers)
-            System.out.println(o);
+        for (Persona pers : per) {
+            System.out.println(pers);
+        }
+
+    }
+
+    public static void makeSomeMagic(ArrayList<Integer> x) {
 
     }
 
