@@ -42,7 +42,7 @@ public class JavaRush {
             put("DINA SHULGA", 170);
             put("YAROSLAVV SHULGA", 120);
         }};
-        
+
         System.out.println(mapa.get("ALEXEY SHULGA"));
 
         mapa.forEach((key, val) -> System.out.printf("NAME: %s | HEIGH: %d\n", key, val));
