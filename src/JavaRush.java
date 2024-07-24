@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class JavaRush {
@@ -37,15 +38,11 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        HashMap<String, Integer> mapa = new HashMap<>(){{
-            put("ALEXEY SHULGA", 180);
-            put("DINA SHULGA", 170);
-            put("YAROSLAVV SHULGA", 120);
-        }};
+        LinkedList<Persona> persList = new LinkedList<>(Arrays.asList(makeRandomPersona(50, 85)));
 
-        System.out.println(mapa.get("ALEXEY SHULGA"));
+        persList.get(45).setName("XYU");
 
-        mapa.forEach((key, val) -> System.out.printf("NAME: %s | HEIGH: %d\n", key, val));
+        persList.forEach(x -> System.out.println(x));
 
     }
 
