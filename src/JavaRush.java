@@ -1,3 +1,4 @@
+import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.function.DoubleToIntFunction;
@@ -47,14 +48,29 @@ public class JavaRush {
      *          ЕСЛИ УДАЛИТЬ THROWS EXCEPTION то это исключение будет непроверяемое!
      * Стэк Трейс StackTrace - позволяет увидеть какой класс и метод выполняется в программе
      *      напр.: StackTraceElement[] methods = Thread.currentThread().getStackTrace();
+     * try-catch-finally
+     * try-with-resources в данную конструкцию можно передать только классы унаследованные от AutoClosable =(
+     *
      *
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        
+        final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
+        final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
+
+        try(FileInputStream br = new FileInputStream(inputPath);
+            FileOutputStream or = new FileOutputStream(outputPath)) {
+            byte[] str = br.readAllBytes();
+            String text = new String(str);
+            or.write();
+        } catch (Exception e) {
+            System.out.println("exception:::: " + e);
+        }
 
     }
+
+
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
         Persona[] result = new Persona[persCount];
