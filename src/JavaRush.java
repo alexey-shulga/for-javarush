@@ -29,8 +29,8 @@ public class JavaRush {
      *      в качестве параметра, т.к. это улучшит производительность, хз почему так
      * Дженерики - типы данных в которых есть возможность установить типы в качестве параметра,
      *      например Collection<Integer> или ТипДанных<ТипПараметра>
-     * Автоупаковка/автораспаковка (для приведения Integer в int можно ничего не делать, компилятор сам разберется с этим)
-     *      (ИСКЛЮЧЕНИЕ - массив int[] и массив Integer[] - разные)
+     * Автоупаковка/автораспаковка (boxing/unboxing) (для приведения Integer в int можно ничего не делать,
+     *      компилятор сам разберется с этим) (ИСКЛЮЧЕНИЕ - массив int[] и массив Integer[] - разные)
      *
      *
      *
@@ -38,14 +38,30 @@ public class JavaRush {
 
     public static void main(String[] args) throws Throwable{
 
-        LinkedList<Persona> persList = new LinkedList<>(Arrays.asList(makeRandomPersona(50, 85)));
-
-        persList.get(45).setName("XYU");
-
-        persList.forEach(x -> System.out.println(x));
+        System.out.println("1. READY TO APOCALIPSE WITH YOUR NUMBER!");
+        System.out.println("2. INPUT UR NUMBER");
+        System.out.print(">: ");
+        Scanner scan = new Scanner(System.in);
+        int number = scan.nextInt();
+        apocalipse(number);
+        System.out.println("7. PEOPLE ALIVE!");
 
     }
 
+    public static void apocalipse(int number) {
+        System.out.println("3. APOCALIPSE STARTED!");
+        devByZero(number);
+    }
+
+    public static void devByZero(int number) {
+        System.out.println("4. BEFORE APOCALIPSE!");
+        try {
+            System.out.println("5. RESULT YourNumber / 0 = " + number / 0);
+        } catch (Exception e) {
+            System.out.println("5. NO DEVISION BY NULL !!! /\\/EVER !!!");
+        }
+        System.out.println("6. AFTER APOCALIPSE!");
+    }
 
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
