@@ -1,5 +1,7 @@
 import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.function.DoubleToIntFunction;
 
@@ -50,7 +52,10 @@ public class JavaRush {
      *      напр.: StackTraceElement[] methods = Thread.currentThread().getStackTrace();
      * try-catch-finally
      * try-with-resources в данную конструкцию можно передать только классы унаследованные от AutoClosable =(
-     *
+     * InputStream - входящий поток | OutputStream - исходящий поток | Оба потока считывают/записывают данные в виде байтов
+     *      это два класса для чтения/записи
+     * Reader / Writer - два класса для чтения/записи, но делают не байтами а символами
+     * Все открытые потоки должны быть закрыты ПОТОК.close()
      *
      */
 
@@ -58,15 +63,10 @@ public class JavaRush {
 
         final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
         final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
+        long start = System.currentTimeMillis();
 
-        try(FileInputStream br = new FileInputStream(inputPath);
-            FileOutputStream or = new FileOutputStream(outputPath)) {
-            byte[] str = br.readAllBytes();
-            String text = new String(str);
-            or.write();
-        } catch (Exception e) {
-            System.out.println("exception:::: " + e);
-        }
+        String text = String.format("NAME: %s, AGE: %d", "Alex", 27);
+        System.out.println(text);
 
     }
 
@@ -76,25 +76,37 @@ public class JavaRush {
         Persona[] result = new Persona[persCount];
         for (int i = 0; i < persCount; i++) {
             result[i] = new Persona();
-            result[i].setName(getRandText());
+            result[i].setName(getRandText(10));
             result[i].setAge((int)(Math.random() * maxAge) + 1);
             result[i].setGender(i % 2 == 0 ? Gender.MALE : Gender.FEMALE);
         }
         return result;
     }
 
-    public static String getRandText() {
+    public static String getRandText(int len) {
         String result = "";
         char[] letters = new char[]{
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
+                '\n', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                ' ', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
         };
-        for (int i = 0; i < (int) (Math.random() * 10) + 1; i++) {
+        for (int i = 0; i < (int) (Math.random() * len) + 1; i++) {
             int random = (int) (Math.random() * 36);
             result += letters[random];
         }
         return result;
     }
+
+    // Довольно быстрое копирование из файла в файл
+    // если делать копирование через readAllBytes файл читался/писался ~10 секунд
+    // если делать через read(byte[]) файл читается/пишется ~0.5 секунд
+    /*try (FileInputStream input = new FileInputStream(inputPath);
+        FileOutputStream output = new FileOutputStream(outputPath)) {
+        byte[] buf = new byte[60000];
+        while (input.available() > 0) {
+            int i = input.read(buf);
+            output.write(buf, 0, i);
+        }
+    }*/
 
 }
 
