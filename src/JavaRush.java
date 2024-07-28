@@ -1,5 +1,7 @@
 import java.io.*;
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -56,6 +58,15 @@ public class JavaRush {
      *      это два класса для чтения/записи
      * Reader / Writer - два класса для чтения/записи, но делают не байтами а символами
      * Все открытые потоки должны быть закрыты ПОТОК.close()
+     * Класс Path используется для работы с файловой системой (технически это интерфейс)
+     *      для каждой операционной системы создается объект для работы именно с этой операционкой
+     *      (WindowsPath, UnixPath и пр.)
+     *      при создании нет ключчевого слова -new- Path filePath = Path.of(PATH_TO_FILE);
+     *      метода Path https://javarush.com/quests/lectures/questsyntaxpro.level15.lecture04
+     * Класс Files используется для работы с файлами, он работает с объектами класса Path
+     *      методы Files https://javarush.com/quests/lectures/questsyntaxpro.level15.lecture05
+     * Класс URL для работы с ресурсами в интернете
+     *
      *
      */
 
@@ -63,10 +74,14 @@ public class JavaRush {
 
         final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
         final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
-        long start = System.currentTimeMillis();
 
-        String text = String.format("NAME: %s, AGE: %d", "Alex", 27);
-        System.out.println(text);
+        String adress = "https://maps.googleapis.com/maps/api/timezone/json";
+        InputStream input = (new URL(adress)).openStream();
+        byte[] buffer = input.readAllBytes();
+        String result = new String(buffer);
+        System.out.println(result);
+        input.close();
+
 
     }
 
@@ -86,8 +101,8 @@ public class JavaRush {
     public static String getRandText(int len) {
         String result = "";
         char[] letters = new char[]{
-                '\n', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                ' ', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
         };
         for (int i = 0; i < (int) (Math.random() * len) + 1; i++) {
             int random = (int) (Math.random() * 36);
