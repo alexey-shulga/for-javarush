@@ -70,26 +70,25 @@ public class JavaRush {
      *
      */
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
         final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
 
-        Path path = Path.of("C:/Users/Shulga/Desktop/Deleted/path1/file1.txt");
-        List<String> fileText = Files.readAllLines(path);
-        ArrayList<Integer> ints = new ArrayList<>();
-        fileText.forEach(x -> {
-            ints.add(Integer.parseInt(x));
-        });
-        Collections.sort(ints, Collections.reverseOrder());
-        Iterator iter = ints.iterator();
-        while (iter.hasNext()) {
-            Integer item = (Integer) iter.next();
-            if (item % 2 == 0)
-                iter.remove();
-        }
-        ints.forEach(x -> System.out.println(x));
+        String directory = "C://Users/Shulga/Desktop/Deleted/";
+        Path path = Path.of(directory);
 
+        try (DirectoryStream<Path> dirs = Files.newDirectoryStream(path)) {
+            dirs.forEach(x -> {
+                try {
+                    System.out.println(Files.size(x));
+                } catch (IOException e) {
+                    System.out.println("FILES.SIZE(X) Что-то пошло не так.");
+                }
+            });
+        } catch (IOException e) {
+            System.out.println("NEWDIRECTORYSTREAM(PATH) Что-то пошло не так.");
+        }
     }
 
 
