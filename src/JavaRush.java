@@ -75,13 +75,20 @@ public class JavaRush {
         final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
         final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
 
-        String adress = "https://maps.googleapis.com/maps/api/timezone/json";
-        InputStream input = (new URL(adress)).openStream();
-        byte[] buffer = input.readAllBytes();
-        String result = new String(buffer);
-        System.out.println(result);
-        input.close();
-
+        Path path = Path.of("C:/Users/Shulga/Desktop/Deleted/path1/file1.txt");
+        List<String> fileText = Files.readAllLines(path);
+        ArrayList<Integer> ints = new ArrayList<>();
+        fileText.forEach(x -> {
+            ints.add(Integer.parseInt(x));
+        });
+        Collections.sort(ints, Collections.reverseOrder());
+        Iterator iter = ints.iterator();
+        while (iter.hasNext()) {
+            Integer item = (Integer) iter.next();
+            if (item % 2 == 0)
+                iter.remove();
+        }
+        ints.forEach(x -> System.out.println(x));
 
     }
 
