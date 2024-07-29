@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -66,31 +68,27 @@ public class JavaRush {
      *      при создании нет ключчевого слова -new- Path filePath = Path.of(PATH_TO_FILE);
      *      метода Path https://javarush.com/quests/lectures/questsyntaxpro.level15.lecture04
      * Класс Files используется для работы с файлами, он работает с объектами класса Path
+     *      Files появился в Java 7, до этого работой с файлами занимался класс File
+     *      Подробнее про Files и еще про обход дерева директорий https://javarush.com/groups/posts/2275
      *      методы Files https://javarush.com/quests/lectures/questsyntaxpro.level15.lecture05
      * Класс URL для работы с ресурсами в интернете
+     * Класс URLConnection для работы с подключениями через сеть, возможно отправлять данные по URL или получать данные
+     *      URLConnection connect = url.openConnection();
+     *      connect.getInputStream() - получение объекта InputStream для получения инфы
+     *      connect.getOutputStream() - получение объекта OutputStream для передачи инфы
      *
      *
+     * Тут про STREAM API, прикольная тема - https://annimon.com/article/2778
      */
 
     public static void main(String[] args) throws  IOException{
         long timeStart = System.currentTimeMillis();
 
+        List<String> text = Files.readAllLines(Path.of("C:/Users/Shulga/Desktop/base.txt"));
 
-        URL url = new URL("https://javarush.com");
-        URLConnection connector = url.openConnection();
+        text.stream().filter(x -> x.contains("баз") || x.contains("Баз")).forEach(System.out::println);
 
-        /*try (OutputStream os = connector.getOutputStream();
-        PrintStream printer = new PrintStream(os)) {
-            printer.printf("HELLO %s!", "Alexey");
-        }
-*/
-        try (InputStream is = connector.getInputStream()) {
-            byte[] bytes = is.readAllBytes();
-            Files.write(Path.of("C:/Users/Shulga/Desktop/base2.txt"), bytes);
-        }
-
-
-        System.out.printf("Время работы программы составило: %d мс", (System.currentTimeMillis() - timeStart));
+        System.out.printf("==========\nВремя работы программы составило: %d мс", (System.currentTimeMillis() - timeStart));
     }
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
