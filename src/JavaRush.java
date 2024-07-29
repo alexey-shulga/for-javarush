@@ -1,9 +1,11 @@
 import java.io.*;
-import java.lang.reflect.Array;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Array;
 import java.util.*;
 import java.util.function.DoubleToIntFunction;
 
@@ -70,28 +72,26 @@ public class JavaRush {
      *
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws  IOException{
+        long timeStart = System.currentTimeMillis();
 
-        final String inputPath = "C:\\Users\\Shulga\\Desktop\\base.txt";
-        final String outputPath = "C:\\Users\\Shulga\\Desktop\\base2.txt";
 
-        String directory = "C://Users/Shulga/Desktop/Deleted/";
-        Path path = Path.of(directory);
+        URL url = new URL("https://javarush.com");
+        URLConnection connector = url.openConnection();
 
-        try (DirectoryStream<Path> dirs = Files.newDirectoryStream(path)) {
-            dirs.forEach(x -> {
-                try {
-                    System.out.println(Files.size(x));
-                } catch (IOException e) {
-                    System.out.println("FILES.SIZE(X) Что-то пошло не так.");
-                }
-            });
-        } catch (IOException e) {
-            System.out.println("NEWDIRECTORYSTREAM(PATH) Что-то пошло не так.");
+        /*try (OutputStream os = connector.getOutputStream();
+        PrintStream printer = new PrintStream(os)) {
+            printer.printf("HELLO %s!", "Alexey");
         }
+*/
+        try (InputStream is = connector.getInputStream()) {
+            byte[] bytes = is.readAllBytes();
+            Files.write(Path.of("C:/Users/Shulga/Desktop/base2.txt"), bytes);
+        }
+
+
+        System.out.printf("Время работы программы составило: %d мс", (System.currentTimeMillis() - timeStart));
     }
-
-
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
         Persona[] result = new Persona[persCount];
