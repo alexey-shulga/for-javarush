@@ -84,9 +84,7 @@ public class JavaRush {
     public static void main(String[] args) throws  IOException{
         long timeStart = System.currentTimeMillis();
 
-        List<String> text = Files.readAllLines(Path.of("C:/Users/Shulga/Desktop/base.txt"));
-
-        text.stream().filter(x -> x.contains("баз") || x.contains("Баз")).forEach(System.out::println);
+        
 
         System.out.printf("==========\nВремя работы программы составило: %d мс", (System.currentTimeMillis() - timeStart));
     }
