@@ -108,34 +108,16 @@ public class JavaRush {
     public static void main(String[] args) throws  IOException{
         long timeStart = System.currentTimeMillis();
 
+        Moderator moder1 = new Moderator();
+        moder1.setUserName("MODERATOR 1");
+        moder1.setUserId(112L);
+        moder1.setAccess("MODER");
 
+        System.out.println(moder1);
 
         System.out.printf("==========\nВремя работы программы составило: %d мс", System.currentTimeMillis() - timeStart);
     }
 
-    public static Persona[] makeRandomPersona(int persCount, int maxAge) {
-        Persona[] result = new Persona[persCount];
-        for (int i = 0; i < persCount; i++) {
-            result[i] = new Persona();
-            result[i].setName(getRandText(10));
-            result[i].setAge((int)(Math.random() * maxAge) + 1);
-            result[i].setGender(i % 2 == 0 ? Gender.MALE : Gender.FEMALE);
-        }
-        return result;
-    }
-
-    public static String getRandText(int len) {
-        String result = "";
-        char[] letters = new char[]{
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
-        };
-        for (int i = 0; i < (int) (Math.random() * len) + 1; i++) {
-            int random = (int) (Math.random() * 36);
-            result += letters[random];
-        }
-        return result;
-    }
 
     // Довольно быстрое копирование из файла в файл
     // если делать копирование через readAllBytes файл читался/писался ~10 секунд
