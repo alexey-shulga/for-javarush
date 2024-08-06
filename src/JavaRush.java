@@ -1,15 +1,14 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.nio.file.DirectoryStream;
+import java.net.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Array;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.*;
-import java.util.function.DoubleToIntFunction;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class JavaRush {
 
@@ -76,6 +75,31 @@ public class JavaRush {
      *      URLConnection connect = url.openConnection();
      *      connect.getInputStream() - получение объекта InputStream для получения инфы
      *      connect.getOutputStream() - получение объекта OutputStream для передачи инфы
+     * Date - класс для работы с датами и временем
+     *      дни недели нумеруются с ВОСКРЕСЕНЬЯ с 0
+     *      (можно получать дату / время например getYear() и изменять их например setYear())
+     * SimpleDateFormat formatter = new SimpleDateFormat("MMM-dd-YYYY") - формат для отображения даты
+     *      String result = formatter.format(Date) - получили дату в формате, который мы указали
+     *      Date.parse() - с помощью этого метода можно пропарсить строку
+     *      Например { Date date = new Date(); date.setTime(Date.parse(Jul 06 12:00:00 2019)); }
+     * Calendar - класс для работы с датами, но более продвинутый, чем date
+     *      Calendar date = Calendar.getInstance() - создание даты с текущим календарем
+     *      дни недели нумеруются с ВОСКРЕСЕНЬЯ с единицы
+     *      есть 3 типа календарей (GregorianCalendar BuddhistCalendar JapaneseImperialCalendar)
+     *      add() - метод позволяет добавить/уменшить количество дней/месяцев и тд в дате
+     *      roll() - прокручивает определенный параметр (день, месяц, год и тд) в дате, не трогая остальные параметры
+     * Date Time API - совеременное средство для работы с датами
+     *      java.time - базовый пакет для Date Time API
+     *      LocalDate LocalTime LocalDateTime Instant Period Duration - обекты этих классов иммутабельны
+     *      после создания они не изменяются
+     *      java.time.format - пакет содержит в себе классы для форматирования времени
+     *          DateTimeFormatter (пришел на замену SimpleDateFormatter)
+     *      java.time.zone - пакет содержит классы для работы с часовыми зонами
+     *          (TimeZone, ZonedDateTime)
+     *      шаблоны в DateTimeFormatter https://javarush.com/quests/lectures/questsyntaxpro.level16.lecture07
+     * В интерфейсах в методах с реализацией нужно писать ключевое слово default
+     * В абстрактных классах в методах без реализации нужно писать ключевое слово abstract
+     *
      *
      *
      * Тут про STREAM API, прикольная тема - https://annimon.com/article/2778
@@ -84,9 +108,9 @@ public class JavaRush {
     public static void main(String[] args) throws  IOException{
         long timeStart = System.currentTimeMillis();
 
-        
 
-        System.out.printf("==========\nВремя работы программы составило: %d мс", (System.currentTimeMillis() - timeStart));
+
+        System.out.printf("==========\nВремя работы программы составило: %d мс", System.currentTimeMillis() - timeStart);
     }
 
     public static Persona[] makeRandomPersona(int persCount, int maxAge) {
